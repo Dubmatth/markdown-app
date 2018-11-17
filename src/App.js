@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
-import './App.css';
-import { sampleText } from './sampleText';
+import React, { Component } from 'react'
+import './App.css'
+import marked from 'marked'
+import { sampleText } from './sampleText'
 
 class App extends Component {
 
@@ -13,6 +14,10 @@ class App extends Component {
     this.setState({ userInput })
   }
 
+  renderText = userInput => {
+    const __html = marked(userInput, { sanitize: true })
+    return { __html }
+  }
   render() {
     return (
       <div className="container">
@@ -26,8 +31,8 @@ class App extends Component {
             </textarea>
           </div>
           <div className="col-sm-6">
-            <div>
-              {this.state.userInput}
+            <div dangerouslySetInnerHTML={this.renderText(this.state.userInput) }>
+              
             </div>
           </div>
         </div>
