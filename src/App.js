@@ -7,6 +7,16 @@ class App extends Component {
 
   state = {
     userInput: sampleText
+  }
+
+  componentDidMount() {
+    const userInput = localStorage.getItem('userInput')
+    !userInput ? this.setState({ userInput: sampleText }) : this.setState({ userInput })
+  }
+  
+  componentDidUpdate() {
+    const { userInput } = this.state
+    localStorage.setItem('userInput', userInput)
   } 
 
   onChange = event => {
